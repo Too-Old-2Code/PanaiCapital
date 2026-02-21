@@ -1,0 +1,297 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-orbitron);
+  --font-mono: var(--font-jetbrains-mono);
+  --color-neon-blue: #00f0ff;
+  --color-neon-magenta: #ff00aa;
+  --color-neon-green: #00ff88;
+  --color-cyber-dark: #0a0e1a;
+  --color-cyber-card: #0d1117;
+  --color-cyber-border: #00f0ff1a;
+  --color-background: #000000;
+  --color-foreground: #e0e6ed;
+}
+
+/* ── Base ────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background: #000000;
+  color: #e0e6ed;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.25);
+  color: #fff;
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 240, 255, 0.2) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.2);
+  border-radius: 3px;
+}
+
+/* ── Glitch Text ─────────────────────────────────── */
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: #00f0ff;
+  animation: glitch-a 5s infinite linear alternate-reverse;
+  z-index: -1;
+}
+
+.glitch-text::after {
+  color: #ff00aa;
+  animation: glitch-b 5s infinite linear alternate-reverse;
+  z-index: -1;
+}
+
+@keyframes glitch-a {
+  0%, 92%, 100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translate(0);
+  }
+  93% {
+    clip-path: inset(15% 0 55% 0);
+    transform: translate(-4px, 2px);
+  }
+  94.5% {
+    clip-path: inset(65% 0 5% 0);
+    transform: translate(4px, -1px);
+  }
+  96% {
+    clip-path: inset(35% 0 35% 0);
+    transform: translate(-2px, 1px);
+  }
+  97.5% {
+    clip-path: inset(75% 0 2% 0);
+    transform: translate(3px, -2px);
+  }
+}
+
+@keyframes glitch-b {
+  0%, 92%, 100% {
+    clip-path: inset(100% 0 0 0);
+    transform: translate(0);
+  }
+  93% {
+    clip-path: inset(45% 0 25% 0);
+    transform: translate(4px, -2px);
+  }
+  94.5% {
+    clip-path: inset(8% 0 65% 0);
+    transform: translate(-4px, 1px);
+  }
+  96% {
+    clip-path: inset(50% 0 20% 0);
+    transform: translate(2px, -1px);
+  }
+  97.5% {
+    clip-path: inset(3% 0 75% 0);
+    transform: translate(-3px, 2px);
+  }
+}
+
+/* ── Scanline Overlay ────────────────────────────── */
+
+.scanline-overlay {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 240, 255, 0.008) 2px,
+    rgba(0, 240, 255, 0.008) 4px
+  );
+  pointer-events: none;
+}
+
+/* ── HUD Corner Brackets ─────────────────────────── */
+
+.hud-corners {
+  position: relative;
+}
+
+.hud-corners::before,
+.hud-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: #00f0ff;
+  border-style: solid;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+
+.hud-corners::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.hud-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.hud-corners:hover::before,
+.hud-corners:hover::after {
+  opacity: 1;
+}
+
+/* ── Neon Glow Utilities ─────────────────────────── */
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.12), 0 0 60px rgba(0, 240, 255, 0.04);
+}
+
+.glow-blue-strong {
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.25), 0 0 80px rgba(0, 240, 255, 0.08);
+}
+
+.glow-magenta {
+  box-shadow: 0 0 20px rgba(255, 0, 170, 0.12), 0 0 60px rgba(255, 0, 170, 0.04);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.12), 0 0 60px rgba(0, 255, 136, 0.04);
+}
+
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5), 0 0 40px rgba(0, 240, 255, 0.2);
+}
+
+.text-glow-magenta {
+  text-shadow: 0 0 20px rgba(255, 0, 170, 0.5), 0 0 40px rgba(255, 0, 170, 0.2);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.2);
+}
+
+/* ── Grid Background ─────────────────────────────── */
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ── Float Animation ─────────────────────────────── */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Neon Button Styles ──────────────────────────── */
+
+.btn-neon-blue {
+  position: relative;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  color: #00f0ff;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-neon-blue:hover {
+  border-color: #00f0ff;
+  background: rgba(0, 240, 255, 0.06);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), inset 0 0 30px rgba(0, 240, 255, 0.03);
+}
+
+.btn-neon-magenta {
+  position: relative;
+  border: 1px solid rgba(255, 0, 170, 0.4);
+  color: #ff00aa;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-neon-magenta:hover {
+  border-color: #ff00aa;
+  background: rgba(255, 0, 170, 0.06);
+  box-shadow: 0 0 30px rgba(255, 0, 170, 0.2), inset 0 0 30px rgba(255, 0, 170, 0.03);
+}
+
+.btn-neon-green {
+  position: relative;
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  color: #00ff88;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-neon-green:hover {
+  border-color: #00ff88;
+  background: rgba(0, 255, 136, 0.06);
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.2), inset 0 0 30px rgba(0, 255, 136, 0.03);
+}
+
+/* ── Form Input Styles ───────────────────────────── */
+
+.cyber-input {
+  background: rgba(0, 240, 255, 0.03);
+  border: 1px solid rgba(0, 240, 255, 0.12);
+  color: #e0e6ed;
+  font-family: var(--font-mono);
+  transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+  outline: none;
+  border-color: rgba(0, 255, 136, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.08);
+  background: rgba(0, 255, 136, 0.03);
+}
+
+.cyber-input::placeholder {
+  color: rgba(224, 230, 237, 0.2);
+  font-family: var(--font-mono);
+}
